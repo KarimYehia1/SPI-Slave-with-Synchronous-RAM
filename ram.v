@@ -12,6 +12,9 @@ reg [ADDR_SIZE - 1 : 0] wr_address, rd_address;
 always @(posedge clk) begin
     if(!rst_n) begin
       dout <= 0;
+      wr_address <= 0;
+      rd_address <= 0;
+      tx_valid <= 0;
     end
     else begin
         if(rx_valid) begin
