@@ -19,6 +19,8 @@ always @(posedge clk) begin
       tx_counter <= 0;
       address_read <= 0;
       rx_valid <= 0;
+      rx_data <= 0;
+      MISO <= 0;
     end
     else begin
         cs <= ns;
