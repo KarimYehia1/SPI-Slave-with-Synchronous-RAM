@@ -16,12 +16,6 @@ reg address_read;
 always @(posedge clk) begin
     if(!rst_n) begin
       cs <= IDLE;
-      rx_counter <= 0;
-      tx_counter <= 0;
-      address_read <= 0;
-      rx_valid <= 0;
-      rx_data <= 0;
-      MISO <= 0;
     end
     else begin
         cs <= ns;
@@ -59,12 +53,14 @@ always @(*) begin
             ns = WRITE;
         end
         READ_ADD: begin
+          address_read = 1;
           if(SS_n)
             ns = IDLE;
           else
             ns = READ_ADD;        
         end
         READ_DATA: begin
+          address_read = 0;
           if(SS_n)
             ns = IDLE;
           else
@@ -92,7 +88,6 @@ always @(posedge clk) begin
       if(rx_counter == 9) begin
         rx_counter <= 0;
         rx_valid <= 1;
-        address_read <= 1;
     end
     else begin
       rx_valid <= 0;
@@ -104,7 +99,6 @@ always @(posedge clk) begin
     if(rx_counter == 9) begin
       rx_counter <= 0;
       rx_valid <= 1;
-      address_read <= 0;
     end
     else begin
       rx_valid <= 0;
@@ -121,10 +115,10 @@ always @(posedge clk) begin
 end
 
 else begin
-  rx_counter <= 0;
-  tx_counter <= 0;
-  rx_valid <= 0;
-  MISO <= 0;
+      rx_counter <= 0;
+      tx_counter <= 0;
+      rx_valid <= 0;
+      MISO <= 0;
 end
 end
 

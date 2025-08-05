@@ -17,6 +17,7 @@ initial begin
 	/*Reset & Initiate Communication*/
 	rst_n=0;
 	SS_n=1;
+	$readmemh("mem.dat", k2.ram.mem);
 	@(negedge clk);
 	rst_n=1;
 	SS_n=0;
