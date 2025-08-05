@@ -6,6 +6,7 @@ output reg [9:0] rx_data;
 
 parameter IDLE = 0, WRITE = 1, CHK_CMD = 2, READ_ADD = 3, READ_DATA = 4;
 
+(* fsm_encoding = "sequential" *)
 reg [2:0] cs, ns;
 reg [3:0] rx_counter;
 reg [2:0] tx_counter;
